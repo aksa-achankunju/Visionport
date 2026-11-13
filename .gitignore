@@ -1,0 +1,36 @@
+
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.idea/
+
+# Model weights and exports
+*.pt
+*.onnx
+*.engine
+*.plan
+
+# YOLO generated runs
+runs/
+
+# Failure/debug outputs
+failures/
+
+# Ignore data files but retain folder
+data/*
+!data/.gitkeep
+
+# Ignore model files but retain folder
+models/*
+!models/.gitkeep
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
