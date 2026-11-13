@@ -105,3 +105,33 @@ The env_check.py script checks:
 
 The repository is organized to support future development
 of training, evaluation, optimization and deployment modules.
+
+## Git Development Workflow
+
+The project uses Git for version control.
+
+### Main Branch
+
+The main branch contains the stable project version.
+
+### Feature Branches
+
+New features and improvements are developed
+in separate branches.
+
+Example:
+
+    git switch -c feature/env-check
+
+### Commit Changes
+
+    git add .
+    git commit -m "Describe your changes"
+
+### Merge Changes
+
+After completing a feature, switch to main
+and merge the feature branch.
+
+    git switch main
+    git merge feature/env-check
