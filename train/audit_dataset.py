@@ -2,7 +2,7 @@
 
 Run:  python audit_dataset.py
       python audit_dataset.py --ann data/idd/annotations/instances.json --images data/idd/images
-
+`
 Checks: class distribution, annotation validity, image files and quality,
 object sizes. Writes docs/audit_report.md and docs/audit_charts.png.
 """
