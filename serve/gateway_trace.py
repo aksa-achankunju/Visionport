@@ -133,3 +133,4 @@ def trace(file: UploadFile = File(...), conf: float = 0.25, iou: float = 0.45):
         "total_ms": round((time.perf_counter() - t_all) * 1000, 2),
         "detections": detections,
     }
+## for web purpose

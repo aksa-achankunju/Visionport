@@ -51,3 +51,4 @@ def detect(file: UploadFile = File(...),conf: float = 0.35):
         "detections":detection,
         "timing_ms":{k:round(v,2) for k,v in r.speed.items()},
     }
+## for web purpose
