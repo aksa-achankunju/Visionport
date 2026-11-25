@@ -1,0 +1,2 @@
+Model,Dataset,Images,Inference Operations,Average Latency (ms),Median Latency (ms),P95 Latency (ms),Throughput (images/sec),RAM Before (MB),RAM After (MB),GPU,GPU Memory Allocated (MB),GPU Memory Reserved (MB)
+yolov8n.pt,IDD,200,600,19.48,16.97,33.08,48.69,1340.88,1343.52,NVIDIA GeForce RTX 3050 6GB Laptop GPU,48.85,60.0

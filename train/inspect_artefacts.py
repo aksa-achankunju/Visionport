@@ -128,35 +128,61 @@ def print_file_inventory(root: Path) -> None:
 
 
 def report_gpu_status() -> bool:
-    """Report CUDA availability and visible GPU names. Return CUDA availability."""
+    """Report NVIDIA GPU, CUDA, driver and hardware details."""
+
     print("\n" + "=" * 72)
     print("2. NVIDIA GPU / CUDA STATUS")
     print("=" * 72)
 
     if torch is None:
-        print("PyTorch is not installed, so CUDA availability cannot be checked.")
+        print("PyTorch is not installed.")
         return False
 
     try:
         cuda_available = torch.cuda.is_available()
+
+        print("CUDA available:", "YES" if cuda_available else "NO")
+        print("PyTorch CUDA version:", torch.version.cuda or "Not available")
+
+        # NVIDIA Driver Version
+        try:
+            result = subprocess.run(
+                ["nvidia-smi", "--query-gpu=driver_version",
+                 "--format=csv,noheader"],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            print("NVIDIA Driver Version:", result.stdout.strip().splitlines()[0])
+        except Exception:
+            print("NVIDIA Driver Version: Not available")
+
         if not cuda_available:
-            print("CUDA available: NO")
             print("PyTorch will use the CPU in this environment.")
             return False
 
-        print("CUDA available: YES")
         print("Visible GPU count:", torch.cuda.device_count())
 
         for index in range(torch.cuda.device_count()):
-            print(f"GPU {index}: {torch.cuda.get_device_name(index)}")
+            print("\nGPU", index, ":", torch.cuda.get_device_name(index))
+
+            props = torch.cuda.get_device_properties(index)
+
+            print(
+                "GPU Compute Capability:",
+                f"{props.major}.{props.minor}"
+            )
+
+            print(
+                "GPU Total Memory:",
+                f"{props.total_memory / (1024 ** 3):.2f} GB"
+            )
 
         return True
 
     except Exception as exc:
         print("Could not query CUDA:", exc)
         return False
-
-
 def load_checkpoint(checkpoint_path: Path) -> Any | None:
     """Load a PyTorch checkpoint for inspection."""
     if torch is None:
